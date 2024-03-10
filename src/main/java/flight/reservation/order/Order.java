@@ -6,13 +6,15 @@ import flight.reservation.Passenger;
 import java.util.List;
 import java.util.UUID;
 
-public class Order {
+public class Order implements OrderListener {
 
     private final UUID id;
     private double price;
     private boolean isClosed = false;
     private Customer customer;
     private List<Passenger> passengers;
+
+    private OrderManager orderManager = new OrderManager();
 
     public Order() {
         this.id = UUID.randomUUID();
@@ -52,6 +54,14 @@ public class Order {
 
     public void setClosed() {
         isClosed = true;
+        update(this);
+    }
+
+    @Override
+    public void update(Order order) {
+        if(order.isClosed()) {
+            orderManager.notify("orderClosed", order);
+        }
     }
 
 }

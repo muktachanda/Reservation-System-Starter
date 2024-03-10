@@ -104,4 +104,9 @@ public class FlightOrder extends Order {
             return false;
         }
     }
+
+    @Override
+    public void setClosed() {
+        super.setClosed();
+    }
 }
