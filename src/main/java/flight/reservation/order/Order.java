@@ -48,6 +48,13 @@ public class Order implements OrderListener {
         this.passengers = passengers;
     }
 
+    @Override
+    public void update(Order order) {
+        if(order.isClosed()) {
+            orderManager.notify("orderClosed", order);
+        }
+    }
+
     public boolean isClosed() {
         return isClosed;
     }
@@ -55,13 +62,6 @@ public class Order implements OrderListener {
     public void setClosed() {
         isClosed = true;
         update(this);
-    }
-
-    @Override
-    public void update(Order order) {
-        if(order.isClosed()) {
-            orderManager.notify("orderClosed", order);
-        }
     }
 
 }
