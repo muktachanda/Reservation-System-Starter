@@ -1,9 +1,10 @@
 package flight.reservation.flight;
 
 import flight.reservation.Airport;
-import flight.reservation.plane.Helicopter;
-import flight.reservation.plane.PassengerDrone;
-import flight.reservation.plane.PassengerPlane;
+// import flight.reservation.plane.Helicopter;
+// import flight.reservation.plane.PassengerDrone;
+// import flight.reservation.plane.PassengerPlane;
+import flight.reservation.plane.Aircraft;
 
 import java.util.Arrays;
 
@@ -12,9 +13,9 @@ public class Flight {
     private int number;
     private Airport departure;
     private Airport arrival;
-    protected Object aircraft;
+    protected Aircraft aircraft;
 
-    public Flight(int number, Airport departure, Airport arrival, Object aircraft) throws IllegalArgumentException {
+    public Flight(int number, Airport departure, Airport arrival, Aircraft aircraft) throws IllegalArgumentException {
         this.number = number;
         this.departure = departure;
         this.arrival = arrival;
@@ -31,20 +32,21 @@ public class Flight {
     private boolean isAircraftValid(Airport airport) {
         return Arrays.stream(airport.getAllowedAircrafts()).anyMatch(x -> {
             String model;
-            if (this.aircraft instanceof PassengerPlane) {
-                model = ((PassengerPlane) this.aircraft).model;
-            } else if (this.aircraft instanceof Helicopter) {
-                model = ((Helicopter) this.aircraft).getModel();
-            } else if (this.aircraft instanceof PassengerDrone) {
-                model = "HypaHype";
-            } else {
-                throw new IllegalArgumentException(String.format("Aircraft is not recognized"));
-            }
+            // if (this.aircraft instanceof PassengerPlane) {
+            //     model = ((PassengerPlane) this.aircraft).model;
+            // } else if (this.aircraft instanceof Helicopter) {
+            //     model = ((Helicopter) this.aircraft).getModel();
+            // } else if (this.aircraft instanceof PassengerDrone) {
+            //     model = "HypaHype";
+            // } else {
+            //     throw new IllegalArgumentException(String.format("Aircraft is not recognized"));
+            // }
+            model = (this.aircraft).getModel();
             return x.equals(model);
         });
     }
 
-    public Object getAircraft() {
+    public Aircraft getAircraft() {
         return aircraft;
     }
 
