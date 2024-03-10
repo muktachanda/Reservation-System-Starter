@@ -2,9 +2,10 @@ package flight.reservation.flight;
 
 import flight.reservation.Airport;
 import flight.reservation.Passenger;
-import flight.reservation.plane.Helicopter;
-import flight.reservation.plane.PassengerDrone;
-import flight.reservation.plane.PassengerPlane;
+// import flight.reservation.plane.Helicopter;
+// import flight.reservation.plane.PassengerDrone;
+// import flight.reservation.plane.PassengerPlane;
+import flight.reservation.plane.Aircraft;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,13 +17,13 @@ public class ScheduledFlight extends Flight {
     private final Date departureTime;
     private double currentPrice = 100;
 
-    public ScheduledFlight(int number, Airport departure, Airport arrival, Object aircraft, Date departureTime) {
+    public ScheduledFlight(int number, Airport departure, Airport arrival, Aircraft aircraft, Date departureTime) {
         super(number, departure, arrival, aircraft);
         this.departureTime = departureTime;
         this.passengers = new ArrayList<>();
     }
 
-    public ScheduledFlight(int number, Airport departure, Airport arrival, Object aircraft, Date departureTime, double currentPrice) {
+    public ScheduledFlight(int number, Airport departure, Airport arrival, Aircraft aircraft, Date departureTime, double currentPrice) {
         super(number, departure, arrival, aircraft);
         this.departureTime = departureTime;
         this.passengers = new ArrayList<>();
@@ -30,16 +31,20 @@ public class ScheduledFlight extends Flight {
     }
 
     public int getCrewMemberCapacity() throws NoSuchFieldException {
-        if (this.aircraft instanceof PassengerPlane) {
-            return ((PassengerPlane) this.aircraft).crewCapacity;
-        }
-        if (this.aircraft instanceof Helicopter) {
-            return 2;
-        }
-        if (this.aircraft instanceof PassengerDrone) {
-            return 0;
-        }
-        throw new NoSuchFieldException("this aircraft has no information about its crew capacity");
+        // if (this.aircraft instanceof PassengerPlane) {
+        //     return ((PassengerPlane) this.aircraft).crewCapacity;
+        // }
+        // if (this.aircraft instanceof Helicopter) {
+        //     return 2;
+        // }
+        // if (this.aircraft instanceof PassengerDrone) {
+        //     return 0;
+        // }
+        // throw new NoSuchFieldException("this aircraft has no information about its crew capacity");
+
+        return (this.aircraft).getCrewCapacity();
+
+
     }
 
     public void addPassengers(List<Passenger> passengers) {
@@ -51,16 +56,20 @@ public class ScheduledFlight extends Flight {
     }
 
     public int getCapacity() throws NoSuchFieldException {
-        if (this.aircraft instanceof PassengerPlane) {
-            return ((PassengerPlane) this.aircraft).passengerCapacity;
-        }
-        if (this.aircraft instanceof Helicopter) {
-            return ((Helicopter) this.aircraft).getPassengerCapacity();
-        }
-        if (this.aircraft instanceof PassengerDrone) {
-            return 4;
-        }
-        throw new NoSuchFieldException("this aircraft has no information about its capacity");
+        // if (this.aircraft instanceof PassengerPlane) {
+        //     return ((PassengerPlane) this.aircraft).passengerCapacity;
+        // }
+        // if (this.aircraft instanceof Helicopter) {
+        //     return ((Helicopter) this.aircraft).getPassengerCapacity();
+        // }
+        // if (this.aircraft instanceof PassengerDrone) {
+        //     return 4;
+        // }
+        // throw new NoSuchFieldException("this aircraft has no information about its capacity");
+
+        return (this.aircraft).getPassengerCapacity();
+
+
     }
 
     public int getAvailableCapacity() throws NoSuchFieldException {
