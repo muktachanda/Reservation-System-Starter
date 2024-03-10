@@ -14,6 +14,8 @@ public class Order {
     private Customer customer;
     private List<Passenger> passengers;
 
+    private OrderManager orderManager = new OrderManager();
+
     public Order() {
         this.id = UUID.randomUUID();
     }
@@ -52,6 +54,7 @@ public class Order {
 
     public void setClosed() {
         isClosed = true;
+        orderManager.notify("orderClosed", this);
     }
 
 }
