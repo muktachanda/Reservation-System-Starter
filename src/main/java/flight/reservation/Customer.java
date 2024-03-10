@@ -4,7 +4,6 @@ import flight.reservation.flight.ScheduledFlight;
 import flight.reservation.order.FlightOrder;
 import flight.reservation.order.Order;
 import flight.reservation.order.OrderListener;
-import flight.reservation.order.OrderManager;
 
 import java.util.ArrayList;
 import java.util.List;
