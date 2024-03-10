@@ -1,5 +1,5 @@
 package flight.reservation.order;
 
-interface OrderListener {
+public interface OrderListener {
     void update(Order order);
 }

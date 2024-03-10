@@ -3,16 +3,19 @@ package flight.reservation;
 import flight.reservation.flight.ScheduledFlight;
 import flight.reservation.order.FlightOrder;
 import flight.reservation.order.Order;
+import flight.reservation.order.OrderListener;
+import flight.reservation.order.OrderManager;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Customer {
+public class Customer implements OrderListener {
 
     private String email;
     private String name;
     private List<Order> orders;
+    private OrderManager orderManager = new OrderManager();
 
     public Customer(String name, String email) {
         this.name = name;
@@ -74,6 +77,11 @@ public class Customer {
 
     public void setOrders(List<Order> orders) {
         this.orders = orders;
+    }
+
+    @Override
+    public void update(Order order) {
+        System.out.println("Order " + order.getId() + " is closed. Thank you for your purchase.");
     }
 
 }
