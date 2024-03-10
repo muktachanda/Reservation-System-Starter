@@ -15,7 +15,6 @@ public class Customer implements OrderListener {
     private String email;
     private String name;
     private List<Order> orders;
-    private OrderManager orderManager = new OrderManager();
 
     public Customer(String name, String email) {
         this.name = name;
