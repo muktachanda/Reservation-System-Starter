@@ -1,4 +1,4 @@
-package flight.reservation;
+package flight_reservation;
 
 import flight.reservation.flight.Flight;
 import flight.reservation.flight.Schedule;

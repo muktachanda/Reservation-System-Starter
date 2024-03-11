@@ -7,6 +7,10 @@ import flight.reservation.order.FlightOrder;
 import flight.reservation.payment.CreditCard;
 import flight.reservation.plane.Helicopter;
 import flight.reservation.plane.PassengerPlane;
+import flight.reservation.Customer;
+import flight.reservation.Airport;
+import flight.reservation.Passenger;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
