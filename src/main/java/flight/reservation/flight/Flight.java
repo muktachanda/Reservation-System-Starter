@@ -5,6 +5,7 @@ import flight.reservation.Airport;
 // import flight.reservation.plane.PassengerDrone;
 // import flight.reservation.plane.PassengerPlane;
 import flight.reservation.plane.Aircraft;
+import flight.reservation.plane_factory.AircraftFactory;
 
 import java.util.Arrays;
 
@@ -14,12 +15,14 @@ public class Flight {
     private Airport departure;
     private Airport arrival;
     protected Aircraft aircraft;
+    private AircraftFactory aircraftFactory;
 
-    public Flight(int number, Airport departure, Airport arrival, Aircraft aircraft) throws IllegalArgumentException {
+    public Flight(int number, Airport departure, Airport arrival, AircraftFactory aircraftFactory, String model) throws IllegalArgumentException {
         this.number = number;
         this.departure = departure;
         this.arrival = arrival;
-        this.aircraft = aircraft;
+        this.aircraft = aircraftFactory.createAircraft(model);
+        this.aircraftFactory = aircraftFactory;
         checkValidity();
     }
 
@@ -65,6 +68,10 @@ public class Flight {
     @Override
     public String toString() {
         return aircraft.toString() + "-" + number + "-" + departure.getCode() + "/" + arrival.getCode();
+    }
+
+    public AircraftFactory getAircraftFactory() {
+        return aircraftFactory;
     }
 
 }
