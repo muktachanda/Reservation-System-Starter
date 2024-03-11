@@ -1,12 +1,12 @@
-package flight.reservation;
+package flight_reservation;
 
 import flight.reservation.flight.Flight;
 import flight.reservation.flight.Schedule;
 import flight.reservation.flight.ScheduledFlight;
-import flight.reservation.plane.Aircraft;
-import flight.reservation.plane.Helicopter;
-import flight.reservation.plane.PassengerDrone;
-import flight.reservation.plane.PassengerPlane;
+// import flight.reservation.plane.Aircraft;
+// import flight.reservation.plane.Helicopter;
+// import flight.reservation.plane.PassengerDrone;
+// import flight.reservation.plane.PassengerPlane;
 import flight.reservation.plane_factory.AircraftFactory;
 import flight.reservation.plane_factory.HelicopterFactory;
 import flight.reservation.plane_factory.PassengerPlaneFactory;
