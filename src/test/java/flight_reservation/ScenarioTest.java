@@ -1,16 +1,18 @@
-package flight.reservation;
+package flight_reservation;
 
 import flight.reservation.flight.Flight;
 import flight.reservation.flight.Schedule;
 import flight.reservation.flight.ScheduledFlight;
 import flight.reservation.order.FlightOrder;
 import flight.reservation.payment.CreditCard;
-import flight.reservation.plane.Helicopter;
-import flight.reservation.plane.PassengerPlane;
+// import flight.reservation.plane.Helicopter;
+// import flight.reservation.plane.PassengerPlane;
 import flight.reservation.plane_factory.AircraftFactory;
 import flight.reservation.plane_factory.HelicopterFactory;
 import flight.reservation.plane_factory.PassengerPlaneFactory;
 import flight.reservation.Airport;
+import flight.reservation.Customer;
+import flight.reservation.Passenger;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
