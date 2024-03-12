@@ -5,7 +5,7 @@ import flight.reservation.Airport;
 // import flight.reservation.plane.PassengerDrone;
 // import flight.reservation.plane.PassengerPlane;
 import flight.reservation.plane.Aircraft;
-import flight.reservation.plane_factory.AircraftFactory;
+// import flight.reservation.plane_factory.AircraftFactory;
 
 import java.util.Arrays;
 
@@ -15,14 +15,15 @@ public class Flight {
     private Airport departure;
     private Airport arrival;
     protected Aircraft aircraft;
-    private AircraftFactory aircraftFactory;
+    // private AircraftFactory aircraftFactory;
 
-    public Flight(int number, Airport departure, Airport arrival, AircraftFactory aircraftFactory, String model) throws IllegalArgumentException {
+    public Flight(int number, Airport departure, Airport arrival, Aircraft aircraft) throws IllegalArgumentException {
         this.number = number;
         this.departure = departure;
         this.arrival = arrival;
-        this.aircraft = aircraftFactory.createAircraft(model);
-        this.aircraftFactory = aircraftFactory;
+        // this.aircraft = aircraftFactory.createAircraft(model);
+        this.aircraft = aircraft;
+        // this.aircraftFactory = aircraftFactory;
         checkValidity();
     }
 
@@ -70,8 +71,8 @@ public class Flight {
         return aircraft.toString() + "-" + number + "-" + departure.getCode() + "/" + arrival.getCode();
     }
 
-    public AircraftFactory getAircraftFactory() {
-        return aircraftFactory;
-    }
+    // public AircraftFactory getAircraftFactory() {
+    //     return aircraftFactory;
+    // }
 
 }

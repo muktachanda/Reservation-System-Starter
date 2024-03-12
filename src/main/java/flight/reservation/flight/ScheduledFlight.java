@@ -5,8 +5,8 @@ import flight.reservation.Passenger;
 // import flight.reservation.plane.Helicopter;
 // import flight.reservation.plane.PassengerDrone;
 // import flight.reservation.plane.PassengerPlane;
-// import flight.reservation.plane.Aircraft;
-import flight.reservation.plane_factory.AircraftFactory;
+import flight.reservation.plane.Aircraft;
+// import flight.reservation.plane_factory.AircraftFactory;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,14 +18,14 @@ public class ScheduledFlight extends Flight {
     private final Date departureTime;
     private double currentPrice = 100;
 
-    public ScheduledFlight(int number, Airport departure, Airport arrival, AircraftFactory aircraftFactory, String model, Date departureTime) {
-        super(number, departure, arrival, aircraftFactory, model);
+    public ScheduledFlight(int number, Airport departure, Airport arrival, Aircraft aircraft, Date departureTime) {
+        super(number, departure, arrival, aircraft);
         this.departureTime = departureTime;
         this.passengers = new ArrayList<>();
     }
 
-    public ScheduledFlight(int number, Airport departure, Airport arrival, AircraftFactory aircraftFactory, String model, Date departureTime, double currentPrice) {
-        super(number, departure, arrival, aircraftFactory, model);
+    public ScheduledFlight(int number, Airport departure, Airport arrival, Aircraft aircraft, Date departureTime, double currentPrice) {
+        super(number, departure, arrival, aircraft);
         this.departureTime = departureTime;
         this.passengers = new ArrayList<>();
         this.currentPrice = currentPrice;

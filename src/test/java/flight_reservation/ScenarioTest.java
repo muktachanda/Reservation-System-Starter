@@ -6,7 +6,7 @@ import flight.reservation.flight.ScheduledFlight;
 import flight.reservation.order.FlightOrder;
 import flight.reservation.payment.CreditCard;
 // import flight.reservation.plane.Helicopter;
-// import flight.reservation.plane.PassengerPlane;
+import flight.reservation.plane.Aircraft;
 import flight.reservation.plane_factory.AircraftFactory;
 import flight.reservation.plane_factory.HelicopterFactory;
 import flight.reservation.plane_factory.PassengerPlaneFactory;
@@ -65,7 +65,8 @@ public class ScenarioTest {
             @DisplayName("then the flight should not be available")
             void thenFlightNotAvailable() {
                 AircraftFactory helicopterFactory = new HelicopterFactory();
-                assertThrows(IllegalArgumentException.class, () -> new Flight(1, startAirport, destinationAirport, helicopterFactory,  "H1"));
+                Aircraft a = helicopterFactory.createAircraft("H1");
+                assertThrows(IllegalArgumentException.class, () -> new Flight(1, startAirport, destinationAirport, a));
             }
 
         }
@@ -79,7 +80,8 @@ public class ScenarioTest {
                 startAirport = new Airport("John F. Kennedy International Airport", "JFK", "Queens, New York, New York");
                 destinationAirport = new Airport("Frankfurt Airport", "FRA", "Frankfurt, Hesse");
                 AircraftFactory helicopterFactory = new HelicopterFactory();
-                flight = new Flight(1, startAirport, destinationAirport, helicopterFactory, "H1");
+                Aircraft a = helicopterFactory.createAircraft("H1");
+                flight = new Flight(1, startAirport, destinationAirport, a);
                 Date departure = TestUtil.addDays(Date.from(Instant.now()), 3);
                 schedule.scheduleFlight(flight, departure);
             }
@@ -148,7 +150,8 @@ public class ScenarioTest {
             startAirport = new Airport("Berlin Airport", "BER", "Berlin, Berlin");
             destinationAirport = new Airport("Frankfurt Airport", "FRA", "Frankfurt, Hesse");
             AircraftFactory passengerPlaneFactory = new PassengerPlaneFactory();
-            flight = new Flight(1, startAirport, destinationAirport, passengerPlaneFactory,  "A380");
+            Aircraft a = passengerPlaneFactory.createAircraft("A380");
+            flight = new Flight(1, startAirport, destinationAirport, a);
             Date departure = TestUtil.addDays(Date.from(Instant.now()), 3);
             schedule.scheduleFlight(flight, departure);
             // customer

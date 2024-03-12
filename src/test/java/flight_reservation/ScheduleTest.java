@@ -3,6 +3,7 @@ package flight_reservation;
 import flight.reservation.flight.Flight;
 import flight.reservation.flight.Schedule;
 import flight.reservation.flight.ScheduledFlight;
+import flight.reservation.plane.Aircraft;
 // import flight.reservation.plane.Aircraft;
 // import flight.reservation.plane.Helicopter;
 // import flight.reservation.plane.PassengerDrone;
@@ -64,7 +65,8 @@ public class ScheduleTest {
         @DisplayName("then removing a flight should still yield an empty list")
         void thenScheduleShouldYieldEmpty() {
             AircraftFactory passengerPlaneFactory = new PassengerPlaneFactory();
-            schedule.removeFlight(new Flight(1, new Airport("a", "a", "a"), new Airport("b", "b", "b"), passengerPlaneFactory, "A380"));
+            Aircraft a = passengerPlaneFactory.createAircraft("A380");
+            schedule.removeFlight(new Flight(1, new Airport("a", "a", "a"), new Airport("b", "b", "b"), a));
             assertEquals(0, schedule.getScheduledFlights().size());
         }
 
@@ -80,8 +82,9 @@ public class ScheduleTest {
                 Airport startAirport = new Airport("Berlin Airport", "BER", "Berlin, Berlin");
                 Airport destAirport = new Airport("Frankfurt Airport", "FRA", "Frankfurt, Hesse");
                 AircraftFactory passengerPlaneFactory = new PassengerPlaneFactory();
+                Aircraft a = passengerPlaneFactory.createAircraft("A380");
                 // PassengerPlane aircraft = new PassengerPlane("A380");
-                flight = new Flight(1, startAirport, destAirport, passengerPlaneFactory, "A380");
+                flight = new Flight(1, startAirport, destAirport, a);
                 departure = TestUtil.addDays(Date.from(Instant.now()), 3);
                 schedule.scheduleFlight(flight, departure);
             }
@@ -135,13 +138,20 @@ public class ScheduleTest {
                 new Airport("Chengdu Shuangliu International Airport", "CTU", "Shuangliu-Wuhou, Chengdu, Sichuan")
         );
 
+        Aircraft a = passengerPlaneFactory.createAircraft("A350");
+        Aircraft b = passengerPlaneFactory.createAircraft("A380");
+        Aircraft c = passengerPlaneFactory.createAircraft("Embraer 190");
+        Aircraft d = passengerPlaneFactory.createAircraft("Antonov AN2");
+        Aircraft e = helicopterFactory.createAircraft("H1");
+        Aircraft f = passengerDroneFactory.createAircraft("HypaHype");
+
         List<Flight> flights = Arrays.asList(
-                new Flight(1, airports.get(0), airports.get(1), passengerPlaneFactory, "A350"),
-                new Flight(2, airports.get(1), airports.get(2), passengerPlaneFactory, "A380"),
-                new Flight(3, airports.get(2), airports.get(4), passengerPlaneFactory, "Embraer 190"),
-                new Flight(4, airports.get(3), airports.get(2), passengerPlaneFactory, "Antonov AN2"),
-                new Flight(5, airports.get(4), airports.get(2), helicopterFactory, "H1"),
-                new Flight(6, airports.get(5), airports.get(7), passengerDroneFactory, "HypaHype")
+                new Flight(1, airports.get(0), airports.get(1), a),
+                new Flight(2, airports.get(1), airports.get(2), b),
+                new Flight(3, airports.get(2), airports.get(4), c),
+                new Flight(4, airports.get(3), airports.get(2), d),
+                new Flight(5, airports.get(4), airports.get(2), e),
+                new Flight(6, airports.get(5), airports.get(7), f)
         );
 
         @BeforeEach

@@ -52,12 +52,12 @@ List<Aircraft> aircrafts = Arrays.asList(a, b, c, d, e, f);
 //     );
 
 List<Flight> flights = Arrays.asList(
-            new Flight(1, airports.get(0), airports.get(1), passengerPlaneFactory, aircrafts.get(0).getModel()),
-            new Flight(2, airports.get(1), airports.get(2), passengerPlaneFactory, aircrafts.get(1).getModel()),
-            new Flight(3, airports.get(2), airports.get(4), passengerPlaneFactory, aircrafts.get(2).getModel()),
-            new Flight(4, airports.get(3), airports.get(2), passengerPlaneFactory, aircrafts.get(3).getModel()),
-            new Flight(5, airports.get(4), airports.get(2), helicopterFactory, aircrafts.get(4).getModel()),
-            new Flight(6, airports.get(5), airports.get(7), passengerDroneFactory, aircrafts.get(5).getModel())
+            new Flight(1, airports.get(0), airports.get(1), aircrafts.get(0)),
+            new Flight(2, airports.get(1), airports.get(2), aircrafts.get(1)),
+            new Flight(3, airports.get(2), airports.get(4), aircrafts.get(2)),
+            new Flight(4, airports.get(3), airports.get(2), aircrafts.get(3)),
+            new Flight(5, airports.get(4), airports.get(2), aircrafts.get(4)),
+            new Flight(6, airports.get(5), airports.get(7), aircrafts.get(5))
     );
 
 //     static List<Flight> flights = Arrays.asList(
