@@ -29,24 +29,27 @@ public class FlightOrder extends Order {
         return flights;
     }
 
+    // Updated method using the chain of responsibility pattern
     private boolean isOrderValid(Customer customer, List<String> passengerNames, List<ScheduledFlight> flights) {
-        boolean valid = true;
-        valid = valid && !noFlyList.contains(customer.getName());
-        valid = valid && passengerNames.stream().noneMatch(passenger -> noFlyList.contains(passenger));
-        valid = valid && flights.stream().allMatch(scheduledFlight -> {
-            try {
-                return scheduledFlight.getAvailableCapacity() >= passengerNames.size();
-            } catch (NoSuchFieldException e) {
-                e.printStackTrace();
-                return false;
-            }
-        });
-        return valid;
+        // Initialize chain
+        OrderCheckHandler chain = setupValidationChain();
+        
+        return chain.check(customer, passengerNames, flights);
+    }
+
+    private OrderCheckHandler setupValidationChain() {
+        OrderCheckHandler noFlyListCustomerCheck = new NoFlyListCustomerCheck();
+        OrderCheckHandler noFlyListPassengerCheck = new NoFlyListPassengerCheck();
+        OrderCheckHandler flightCapacityCheck = new FlightCapacityCheck();
+
+        noFlyListCustomerCheck.setNextHandler(noFlyListPassengerCheck);
+        noFlyListPassengerCheck.setNextHandler(flightCapacityCheck);
+
+        return noFlyListCustomerCheck;
     }
 
     public boolean processOrder() {
         if (isClosed()) {
-            // Payment is already proceeded
             return true;
         }
         
@@ -56,4 +59,54 @@ public class FlightOrder extends Order {
         }
         return isPaid;
     }
+
+    // Abstract Handler
+    abstract class OrderCheckHandler {
+        protected OrderCheckHandler nextHandler;
+
+        public void setNextHandler(OrderCheckHandler nextHandler) {
+            this.nextHandler = nextHandler;
+        }
+
+        public abstract boolean check(Customer customer, List<String> passengerNames, List<ScheduledFlight> flights);
+    }
+
+    // Concrete Handlers
+    class NoFlyListCustomerCheck extends OrderCheckHandler {
+        @Override
+        public boolean check(Customer customer, List<String> passengerNames, List<ScheduledFlight> flights) {
+            if (noFlyList.contains(customer.getName())) {
+                return false;
+            }
+            return nextHandler == null || nextHandler.check(customer, passengerNames, flights);
+        }
+    }
+
+    class NoFlyListPassengerCheck extends OrderCheckHandler {
+        @Override
+        public boolean check(Customer customer, List<String> passengerNames, List<ScheduledFlight> flights) {
+            if (passengerNames.stream().anyMatch(passenger -> noFlyList.contains(passenger))) {
+                return false;
+            }
+            return nextHandler == null || nextHandler.check(customer, passengerNames, flights);
+        }
+    }
+
+    class FlightCapacityCheck extends OrderCheckHandler {
+        @Override
+        public boolean check(Customer customer, List<String> passengerNames, List<ScheduledFlight> flights) {
+            for (ScheduledFlight scheduledFlight : flights) {
+                try {
+                    if (scheduledFlight.getAvailableCapacity() < passengerNames.size()) {
+                        return false;
+                    }
+                } catch (NoSuchFieldException e) {
+                    e.printStackTrace();
+                    return false;
+                }
+            }
+            return nextHandler == null || nextHandler.check(customer, passengerNames, flights);
+        }
+    }
 }
+
