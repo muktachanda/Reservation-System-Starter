@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Dummy credit card class.
  */
-public class CreditCard {
+public class CreditCard implements PaymentMethod{
     private double amount;
     private String number;
     private Date date;
@@ -24,6 +24,7 @@ public class CreditCard {
         this.amount = amount;
     }
 
+    @Override
     public double getAmount() {
         return amount;
     }
