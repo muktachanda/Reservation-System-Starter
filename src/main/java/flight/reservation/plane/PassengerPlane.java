@@ -6,6 +6,9 @@ public class PassengerPlane implements Aircraft{
     public int passengerCapacity;
     private int crewCapacity;
 
+    public PassengerPlane() {
+    }
+
     public PassengerPlane(String model) {
         this.model = model;
         switch (model) {
@@ -28,6 +31,10 @@ public class PassengerPlane implements Aircraft{
             default:
                 throw new IllegalArgumentException(String.format("Model type '%s' is not recognized", model));
         }
+    }
+
+    public void setCrewCapacity(int crewCapacity) {
+        this.crewCapacity = crewCapacity;
     }
 
     public String getModel() {
